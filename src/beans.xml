@@ -1,0 +1,44 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+
+<beans xmlns = "http://www.springframework.org/schema/beans"
+   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation = "http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+   <bean id="helloWorld" class="HelloWorld" scope="prototype">
+      <property name="message" value="Hello World!"/>
+      <property name="extraBeanA" ref="extraBeanA"/>
+      <property name="extraBeanB" ref="extraBeanB" />
+      <!-- 
+      <constructor-arg value="Hello" type="java.lang.String"> tags to pass args to constructor
+      type is only needed if overloading is ambiguous, can also use index attribute for position of arg in constructor
+      attribute 'ref' can be used to inject dependency of a bean, pass in its id
+      inner bean can be made by putting it within property tag, ignore the 'ref' attribute and 'id' of inner bean
+      idref tag can be nested within property tag to reference ONLY id of that name
+      autowire attribute on bean tag can set dependencies based on stuff like other beans' ids
+      parent attribute on bean tag can inherit properties from a parent bean
+      abstract attribute on bean tag can allow for inheritance of that bean without instantiation in ApplicationContext
+      init-method="myInitMethod" and destroy-method="myDestroyMethod" are attributes on bean tag for lifecycle callbacks
+      can set globals in beans tag, default-init-method and default-destroy-method
+      -->
+   </bean>
+   
+   <bean id="extraBeanA" class="ExtraBean">
+   	<property name="extraBeanMessage" value="uwotm8" />
+   </bean>
+   
+   <bean id="extraBeanB" class="ExtraBean">
+   	<property name="extraBeanMessage" value="${extraBeanB.extraBeanMessage}" />
+   </bean>
+   
+   <bean class="DisplayNameBeanPostProcessor"/>
+   
+   <bean class="MyBeanFactoryPostProcessor"/>
+   
+   <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+   	<property name="locations" value="test.properties"/>
+   </bean>
+   
+   <alias name="helloWorld" alias="yoWorld"/>
+
+</beans>
