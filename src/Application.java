@@ -7,7 +7,7 @@ public class Application {
 	public static void main(String[] args) {
 		AbstractApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
 		context.registerShutdownHook();
-		HelloWorld obj = (HelloWorld) context.getBean("yoWorld");
+		Messenger obj = (Messenger) context.getBean("yoWorld"); //alias for HelloWorld.class
 		obj.getMessage();
 	}
 }
