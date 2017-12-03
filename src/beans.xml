@@ -8,10 +8,11 @@
    http://www.springframework.org/schema/context
    http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
-   <bean id="helloWorld" class="HelloWorld" scope="prototype">
+   <bean id="helloWorld" class="io.github.wilsontheory.HelloWorld" scope="prototype">
       <property name="message" value="Hello World!"/>
       <property name="extraBeanA" ref="extraBeanA"/>
       <property name="extraBeanB" ref="extraBeanB" />
+      <property name="uberBean" ref="uberBean" />
       <!-- 
       <constructor-arg value="Hello" type="java.lang.String"> tags to pass args to constructor
       type is only needed if overloading is ambiguous, can also use index attribute for position of arg in constructor
@@ -26,26 +27,30 @@
       -->
    </bean>
    
-   <bean id="extraBeanA" class="ExtraBean">
+   <bean id="extraBeanA" class="io.github.wilsontheory.ExtraBean">
    	<property name="extraBeanMessage" value="uwotm8" />
    </bean>
    
-   <bean id="extraBeanB" class="ExtraBean">
+   <bean id="extraBeanB" class="io.github.wilsontheory.ExtraBean">
    	<property name="extraBeanMessage" value="${extraBeanB.extraBeanMessage}" />
    </bean>
    
-   <bean id="extraBeanC" class="ExtraBean">
+   <bean id="extraBeanC" class="io.github.wilsontheory.ExtraBean">
    	<property name="extraBeanMessage" value="annotated dependency injection is cool"/>
    </bean>
    
-   <bean class="DisplayNameBeanPostProcessor"/>
+   <bean class="io.github.wilsontheory.DisplayNameBeanPostProcessor"/>
    <!-- for post bean init -->
-   <bean class="MyBeanFactoryPostProcessor"/>
+   
+   <bean class="io.github.wilsontheory.MyBeanFactoryPostProcessor"/>
    <!-- for post bean factory or app context init -->
    
    <bean class="org.springframework.beans.factory.annotation.RequiredAnnotationBeanPostProcessor"/>
    <!-- post bean init, check required annotations and throws exception if null -->
-   <context:annotation-config /> <!-- to handle all annotations-->
+   
+   <context:annotation-config /> <!-- to handle all annotations of registered beans -->
+   
+   <context:component-scan base-package="io.github.wilsontheory"/> <!-- to handle stereotype annotations -->
    
    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
    	<property name="locations" value="test.properties"/>

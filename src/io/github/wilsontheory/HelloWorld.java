@@ -1,3 +1,4 @@
+package io.github.wilsontheory;
 import javax.annotation.Resource;
 
 import org.springframework.beans.factory.DisposableBean;
@@ -11,6 +12,7 @@ public class HelloWorld implements InitializingBean, DisposableBean, Messenger {
    private ExtraBean extraBeanA;
    private ExtraBean extraBeanB;
    private ExtraBean extraBeanC;
+   private UberBean uberBean;
 
    @Required
    public void setMessage(String message){
@@ -22,6 +24,7 @@ public class HelloWorld implements InitializingBean, DisposableBean, Messenger {
       System.out.println("ExtraMessage from ExtraBeanA: " + extraBeanA.extraBeanMessage);
       System.out.println("ExtraMessage from ExtraBeanB: " + extraBeanB.extraBeanMessage);
       System.out.println("ExtraMessage from ExtraBeanC: " + extraBeanC.extraBeanMessage);
+      System.out.println("UberBean message: " + uberBean.getUberBeanMessage());
    }
    
 	@Override
@@ -41,8 +44,13 @@ public class HelloWorld implements InitializingBean, DisposableBean, Messenger {
 		this.extraBeanB = extraBeanB;
 	}
 
+	//some JSR250 annotations are supported in Spring
 	@Resource(name="extraBeanC")
 	public void setExtraBeanC(ExtraBean extraBeanC) {
 		this.extraBeanC = extraBeanC;
+	}
+	
+	public void setUberBean(UberBean uberBean){
+		this.uberBean = uberBean;
 	}
 }
