@@ -4,7 +4,9 @@ import javax.annotation.Resource;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Required;
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.support.ResourceBundleMessageSource;
 
 public class HelloWorld implements InitializingBean, DisposableBean, Messenger {
 	//can implement ApplicationContextAware for access to context, other interfaces do similar
@@ -13,6 +15,7 @@ public class HelloWorld implements InitializingBean, DisposableBean, Messenger {
    private ExtraBean extraBeanB;
    private ExtraBean extraBeanC;
    private UberBean uberBean;
+   private MessageSource messageSource;
 
    @Required
    public void setMessage(String message){
@@ -25,6 +28,7 @@ public class HelloWorld implements InitializingBean, DisposableBean, Messenger {
       System.out.println("ExtraMessage from ExtraBeanB: " + extraBeanB.extraBeanMessage);
       System.out.println("ExtraMessage from ExtraBeanC: " + extraBeanC.extraBeanMessage);
       System.out.println("UberBean message: " + uberBean.getUberBeanMessage());
+      System.out.println("GET MESSAGE: " + messageSource.getMessage("superbeanmessage", null, "default superbeanmsg", null));
    }
    
 	@Override
@@ -52,5 +56,9 @@ public class HelloWorld implements InitializingBean, DisposableBean, Messenger {
 	
 	public void setUberBean(UberBean uberBean){
 		this.uberBean = uberBean;
+	}
+
+	public void setMessageSource(MessageSource messageSource) {
+		this.messageSource = messageSource;
 	}
 }

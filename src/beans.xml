@@ -13,6 +13,7 @@
       <property name="extraBeanA" ref="extraBeanA"/>
       <property name="extraBeanB" ref="extraBeanB" />
       <property name="uberBean" ref="uberBean" />
+      <property name="messageSource" ref="messageSource" />
       <!-- 
       <constructor-arg value="Hello" type="java.lang.String"> tags to pass args to constructor
       type is only needed if overloading is ambiguous, can also use index attribute for position of arg in constructor
@@ -37,6 +38,15 @@
    
    <bean id="extraBeanC" class="io.github.wilsontheory.ExtraBean">
    	<property name="extraBeanMessage" value="annotated dependency injection is cool"/>
+   </bean>
+   
+   <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+   <!-- pick messages out of property files -->
+   	<property name="basenames">
+   		<list>
+   			<value>mymessages</value>
+   		</list>
+   	</property>
    </bean>
    
    <bean class="io.github.wilsontheory.DisplayNameBeanPostProcessor"/>

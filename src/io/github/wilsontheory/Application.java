@@ -10,5 +10,6 @@ public class Application {
 		context.registerShutdownHook();
 		Messenger obj = (Messenger) context.getBean("yoWorld"); //alias for HelloWorld.class
 		obj.getMessage();
+		context.getMessage("supermessage", null, "default message", null);
 	}
 }
