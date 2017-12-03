@@ -3,6 +3,7 @@ import javax.annotation.Resource;
 
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
@@ -15,6 +16,7 @@ public class HelloWorld implements InitializingBean, DisposableBean, Messenger {
    private ExtraBean extraBeanB;
    private ExtraBean extraBeanC;
    private UberBean uberBean;
+   @Autowired
    private MessageSource messageSource;
 
    @Required
@@ -23,12 +25,13 @@ public class HelloWorld implements InitializingBean, DisposableBean, Messenger {
       this.message  = message;
    }
    public void getMessage(){
-      System.out.println("Message : " + message);
-      System.out.println("ExtraMessage from ExtraBeanA: " + extraBeanA.extraBeanMessage);
-      System.out.println("ExtraMessage from ExtraBeanB: " + extraBeanB.extraBeanMessage);
-      System.out.println("ExtraMessage from ExtraBeanC: " + extraBeanC.extraBeanMessage);
-      System.out.println("UberBean message: " + uberBean.getUberBeanMessage());
-      System.out.println("GET MESSAGE: " + messageSource.getMessage("superbeanmessage", null, "default superbeanmsg", null));
+      System.out.println("HelloWorld: Message : " + message);
+      System.out.println("HelloWorld: Message from ExtraBeanA is " + extraBeanA.extraBeanMessage);
+      System.out.println("HelloWorld: Message from ExtraBeanB is" + extraBeanB.extraBeanMessage);
+      System.out.println("HelloWorld: Message from ExtraBeanC is: " + extraBeanC.extraBeanMessage);
+      System.out.println("HelloWorld: UberBean message is " + uberBean.getUberBeanMessage());
+      System.out.println("HelloWorld: get superbeanmessage from mymessages " + messageSource.getMessage("superbeanmessage", 
+    		  new Object[]{"placeholder"}, "default superbeanmsg", null));
    }
    
 	@Override

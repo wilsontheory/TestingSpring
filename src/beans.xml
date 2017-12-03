@@ -13,7 +13,6 @@
       <property name="extraBeanA" ref="extraBeanA"/>
       <property name="extraBeanB" ref="extraBeanB" />
       <property name="uberBean" ref="uberBean" />
-      <property name="messageSource" ref="messageSource" />
       <!-- 
       <constructor-arg value="Hello" type="java.lang.String"> tags to pass args to constructor
       type is only needed if overloading is ambiguous, can also use index attribute for position of arg in constructor
